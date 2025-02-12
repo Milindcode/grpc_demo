@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package sample;
+option go_package = "/;sample";
+
+service FileStreamer{
+    rpc SendFile(stream FileData) returns (ServerResponse);
+}
+
+message FileData{
+    bytes chunk =1;
+    string fileName = 2;
+}
+
+message ServerResponse{
+    bool status = 1; 
+    string message =2; 
+}
