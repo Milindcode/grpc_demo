@@ -17,7 +17,7 @@ type FileServer struct {
 func (server *FileServer) SendFile(stream sample.FileStreamer_SendFileServer) error {
 	var file *os.File
 	var fileName string
-
+	count := 1
 	for {
 		chunk, err := stream.Recv()
 		if err == io.EOF {
@@ -44,6 +44,9 @@ func (server *FileServer) SendFile(stream sample.FileStreamer_SendFileServer) er
 
 			log.Println("Recieveing file: " + fileName)
 		}
+
+		log.Printf("Recieved chunk-%v\n", count)
+		count++ 
 
 		_, err = file.Write(chunk.Chunk)
 		if err != nil {
