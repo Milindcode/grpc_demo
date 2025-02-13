@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package sample; 
+
+option go_package = "/;sample";
+
+service StockService{
+    rpc TestFunc (StockRequest) returns (stream StockResponse);
+}
+
+message StockRequest{
+    string Symbol =1 ;
+}
+
+message StockResponse{
+    int64 TimeStamp = 1; 
+    int64 Price = 2 ; 
+    string Symbol = 3; 
+}
